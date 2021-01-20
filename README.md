@@ -1,3 +1,4 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/66f3gc8r2poybg94?svg=true)](https://ci.appveyor.com/project/MKSInc/ahj-hw-8-sse-ws-1-online-report-frontend)
 # 8. Домашнее задание к лекции «EventSource, WebSockets»
 
 Правила сдачи задания:
@@ -11,7 +12,7 @@
 
 ---
 
-## 8.1 Онлайн репортаж (Frontend, [Backend](AHJ-hw.-8-SSE-WS.-1-Onlain-report-Backend))
+## 8.1 Онлайн репортаж (Frontend, [Backend](AHJ-hw.-8-SSE-WS.-1-Online-report-Backend))
 
 ### Легенда
 
