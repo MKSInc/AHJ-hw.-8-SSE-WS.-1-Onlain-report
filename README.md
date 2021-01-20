@@ -11,7 +11,7 @@
 
 ---
 
-## 8.1 Онлайн репортаж
+## 8.1 Онлайн репортаж (Frontend, [Backend](AHJ-hw.-8-SSE-WS.-1-Onlain-report-Backend))
 
 ### Легенда
 
