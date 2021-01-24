@@ -1,0 +1,45 @@
+.online-report {
+  min-width: 300px;
+  max-width: 460px;
+  min-height: 560px;
+  border: 1px solid #d3d3d3;
+  border-radius: 20px;
+  box-shadow: 0 0 5px 0 grey;
+  margin: 0 auto;
+  padding: 50px 0
+}
+.events-list {
+  list-style-type: none;
+  height: 460px;
+  overflow: auto;
+  margin-right: 30px;
+  padding-left: 60px
+}
+.events-list__item {
+  margin-bottom: 30px
+}
+.event__time {
+  font-size: 80%;
+  color: #696969
+}
+.event__description {
+  display: block;
+  position: relative;
+  margin-top: 5px
+}
+.event__description:before {
+  position: absolute;
+  top: calc(47% - 15px);
+  left: -40px;
+  width: 30px;
+  height: 30px;
+  background-size: contain
+}
+.event__description_action_freekick:before {
+  content: '';
+  background-image: url('../../img/freekick.png')
+}
+.event__description_action_goal:before {
+  content: '';
+  background-image: url('../../img/goal.png')
+}
