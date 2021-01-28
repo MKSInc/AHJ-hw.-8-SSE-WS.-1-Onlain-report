@@ -1,5 +1,6 @@
 import onlineReportHTML from '../html/online-report.html';
 import HiddenTempEl from './utility';
+import getEventsListItemEl from './getEventsListItemEl';
 
 export default class OnlineReport {
   constructor(rootURL) {
@@ -20,53 +21,71 @@ export default class OnlineReport {
     };
   }
 
-  init(parentEl) {
+  async init(parentEl) {
     let htEl = new HiddenTempEl(onlineReportHTML).el;
 
     this.els.onlineReport = htEl.querySelector(this.selectors.onlineReport);
     this.els.eventList = this.els.onlineReport.querySelector(this.selectors.eventList);
 
+    this.els.onlineReport.querySelector('[data-id="restart"]')
+      .addEventListener('click', async () => {
+        const response = await fetch(`${this.URL.root}/restart`);
+        console.log('Restart click:', await response.text());
+        this.createStreamSSE();
+      });
+
     parentEl.append(this.els.onlineReport);
     htEl.remove();
     htEl = null;
 
-    // this.getEvents();
+    const events = await this.getEvents();
+    const eventsEls = events.map(getEventsListItemEl);
+    this.els.eventList.append(...eventsEls);
+
+    if (events[events.length - 1].event === 'end') return 'Game over';
     this.createStreamSSE();
+    return 'Stream started';
   }
 
-  /* Получить все события от начала матча на данный момент. */
+  /* Получить все события от начала матча на данный момент.
+  *  Так как это async функция, то все ошибки пробросятся на верхний уровень и отловятся
+  *  в main.js */
   async getEvents() {
-    try {
-      const response = await fetch(this.URL.events);
-      if (!response.ok) throw Error(`${response.status} (${response.statusText})`);
-      const events = await response.json();
-      console.log(events);
-    } catch (e) {
-      console.error('⛔', e);
-    }
+    const response = await fetch(this.URL.events);
+    if (!response.ok) throw Error(`${response.status} (${response.statusText})`);
+    const eventsText = await response.text();
+    return JSON.parse(eventsText, ((key, value) => {
+      if (key === 'created') return new Date(value);
+      return value;
+    }));
+  }
+
+  showEvent(eventSSE) {
+    const event = {
+      data: JSON.parse(eventSSE.data, ((key, value) => {
+        if (key === 'created') return new Date(value);
+        return value;
+      })),
+      type: eventSSE.type,
+    };
+
+    const eventEl = getEventsListItemEl(event);
+    this.els.eventList.append(eventEl);
   }
 
   createStreamSSE() {
     const streamSSE = new EventSource(this.URL.streamSSE);
-    streamSSE.addEventListener('start', (event) => {
-      console.log(event);
-    });
+    streamSSE.addEventListener('start', (event) => this.showEvent(event));
+    streamSSE.addEventListener('action', (event) => this.showEvent(event));
+    streamSSE.addEventListener('freekick', (event) => this.showEvent(event));
+    streamSSE.addEventListener('goal', (event) => this.showEvent(event));
 
-    streamSSE.addEventListener('action', (event) => {
-      console.log(event);
-    });
-
-    streamSSE.addEventListener('freekick', (event) => {
-      console.log(event);
-    });
-
-    streamSSE.addEventListener('goal', (event) => {
-      console.log(event);
-    });
+    streamSSE.addEventListener('message', (event) => this.showEvent(event));
 
     streamSSE.addEventListener('end', (event) => {
+      // eslint-disable-next-line no-console
       console.log('Stream closed on client');
-      console.log(event);
+      this.showEvent(event);
       // Приходится закрывать поток на стороне клиента, так как на сервере закрыть поток
       // без последующих переподключений не удается.
       streamSSE.close();
@@ -75,8 +94,8 @@ export default class OnlineReport {
     streamSSE.addEventListener('error', (event) => {
       if (event.eventPhase === EventSource.CLOSED) {
         // eslint-disable-next-line no-console
-        console.log('Connection closed', event);
-        // Если прописать закрытие потока сдесь, то браузер перестанет переподключаться
+        console.error('⛔ Error: Connection closed!', event);
+        // Если прописать закрытие потока здесь, то браузер перестанет переподключаться
         // при обрыве соединения.
         // streamSSE.close();
         return;

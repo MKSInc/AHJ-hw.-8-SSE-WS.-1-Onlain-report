@@ -18,16 +18,16 @@
 .events-list__item {
   margin-bottom: 30px
 }
-.event__time {
+.events-list__time {
   font-size: 80%;
   color: #696969
 }
-.event__description {
+.events-list__description {
   display: block;
   position: relative;
   margin-top: 5px
 }
-.event__description:before {
+.events-list__description:before {
   position: absolute;
   top: calc(47% - 15px);
   left: -40px;
@@ -35,11 +35,11 @@
   height: 30px;
   background-size: contain
 }
-.event__description_action_freekick:before {
+.events-list__description_action_freekick:before {
   content: '';
   background-image: url('../../img/freekick.png')
 }
-.event__description_action_goal:before {
+.events-list__description_action_goal:before {
   content: '';
   background-image: url('../../img/goal.png')
 }
