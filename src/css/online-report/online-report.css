@@ -1,13 +1,20 @@
 .online-report {
   min-width: 300px;
   max-width: 460px;
+
+  margin: 0 auto;
+}
+
+.online-report__content {
   min-height: 560px;
   border: 1px solid #d3d3d3;
   border-radius: 20px;
   box-shadow: 0 0 5px 0 grey;
-  margin: 0 auto;
+
+  margin-top: 20px;
   padding: 50px 0
 }
+
 .events-list {
   list-style-type: none;
   height: 460px;

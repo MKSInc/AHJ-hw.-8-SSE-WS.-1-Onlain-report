@@ -1,0 +1,23 @@
+.btn-restart {
+  border: 1px solid #d3d3d3;
+  border-radius: 20px;
+
+  background-color: white;
+  box-shadow: 0 0 5px 0 grey;
+
+  padding: 10px;
+
+  cursor: pointer;
+}
+
+.btn-restart:hover {
+  background-color: #efefef;
+}
+
+.btn-restart:focus {
+  outline: none;
+}
+
+.btn-restart:active {
+  transform: translate(2px, 2px);
+}

@@ -6,6 +6,7 @@ const rootURL = 'https://ahj-8-1-online-report.herokuapp.com';
 
 const onlineReport = new OnlineReport(rootURL);
 onlineReport.init(container)
+// eslint-disable-next-line no-console
   .then((r) => console.log(r))
   // eslint-disable-next-line no-console
   .catch((e) => console.error('⛔', e));

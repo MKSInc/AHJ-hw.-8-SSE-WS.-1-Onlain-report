@@ -7,11 +7,13 @@ export default class OnlineReport {
     this.els = {
       onlineReport: null,
       eventList: null,
+      btnRestart: null,
     };
 
     this.selectors = {
       onlineReport: '[data-widget="online-report"]',
       eventList: '[data-id="events-list"]',
+      btnRestart: '[data-id="btn-restart"]',
     };
 
     this.URL = {
@@ -27,12 +29,8 @@ export default class OnlineReport {
     this.els.onlineReport = htEl.querySelector(this.selectors.onlineReport);
     this.els.eventList = this.els.onlineReport.querySelector(this.selectors.eventList);
 
-    this.els.onlineReport.querySelector('[data-id="restart"]')
-      .addEventListener('click', async () => {
-        const response = await fetch(`${this.URL.root}/restart`);
-        console.log('Restart click:', await response.text());
-        this.createStreamSSE();
-      });
+    this.els.btnRestart = this.els.onlineReport.querySelector(this.selectors.btnRestart);
+    this.els.btnRestart.addEventListener('click', this.onBtnRestartClick.bind(this));
 
     parentEl.append(this.els.onlineReport);
     htEl.remove();
@@ -103,5 +101,15 @@ export default class OnlineReport {
       // eslint-disable-next-line no-console
       console.error('⛔ SSE Error!', event);
     });
+  }
+
+  async onBtnRestartClick() {
+    const response = await fetch(`${this.URL.root}/restart`);
+    if (!response.ok) throw Error(`${response.status} (${response.statusText})`);
+    // eslint-disable-next-line no-console
+    console.log('Restart click:', await response.text());
+
+    this.els.eventList.textContent = '';
+    this.createStreamSSE();
   }
 }
