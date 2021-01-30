@@ -2,7 +2,7 @@ import OnlineReport from './OnlineReport';
 
 const container = document.querySelector('[data-id="container"]');
 // const rootURL = 'http://localhost:3000';
-const rootURL = 'https://ahj-8-1-online-report.herokuapp.com';
+const rootURL = 'https://ahj-8-3-online-report.herokuapp.com';
 
 const onlineReport = new OnlineReport(rootURL);
 onlineReport.init(container)
