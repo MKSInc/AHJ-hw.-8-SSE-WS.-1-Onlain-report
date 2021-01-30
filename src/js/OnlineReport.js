@@ -40,7 +40,7 @@ export default class OnlineReport {
     const eventsEls = events.map(getEventsListItemEl);
     this.els.eventList.append(...eventsEls);
 
-    if (events[events.length - 1].event === 'end') return 'Game over';
+    if (events[events.length - 1].type === 'end') return 'Game over';
     this.createStreamSSE();
     return 'Stream started';
   }

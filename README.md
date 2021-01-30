@@ -1,5 +1,5 @@
-### [Heroku server with Frontend](https://ahj-8-1-online-report.herokuapp.com/)
-[![Build status](https://ci.appveyor.com/api/projects/status/66f3gc8r2poybg94?svg=true)](https://ci.appveyor.com/project/MKSInc/ahj-hw-8-sse-ws-1-online-report-frontend)
+### [Heroku server with Frontend](https://ahj-8-3-online-report.herokuapp.com/)
+[![Build status](https://ci.appveyor.com/api/projects/status/66f3gc8r2poybg94?svg=true)](https://ci.appveyor.com/project/MKSInc/ahj-hw-8-sse-ws-3-online-report-frontend)
 # 8. Домашнее задание к лекции «EventSource, WebSockets»
 
 Правила сдачи задания:
@@ -13,7 +13,7 @@
 
 ---
 
-## 8.1 Онлайн репортаж (Frontend, [Backend](https://github.com/MKSInc/AHJ-hw.-8-SSE-WS.-1-Online-report-Backend))
+## 8.1 Онлайн репортаж (Frontend, [Backend](https://github.com/MKSInc/AHJ-hw.-8-SSE-WS.-3-Online-report-Backend))
 
 ### Легенда
 
