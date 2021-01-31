@@ -13,7 +13,8 @@
 
 ---
 
-## 8.1 Онлайн репортаж (Frontend, [Backend](https://github.com/MKSInc/AHJ-hw.-8-SSE-WS.-3-Online-report-Backend))
+## 8.3 Онлайн репортаж* (задача со звёздочкой) (Frontend, [Backend](https://github.com/MKSInc/AHJ-hw.-8-SSE-WS.-3-Online-report-Backend))
+Важно: эта задача не является обязательной. Её (не)выполнение не влияет на получение зачёта по ДЗ.
 
 ### Легенда
 
